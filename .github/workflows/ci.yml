@@ -10,13 +10,18 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Set up RVM
+      run: |
+        curl -sSL https://get.rvm.io | bash
+
     - name: Set up Ruby 2.5.3
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.5.3
+      run: |
+        source $HOME/.rvm/scripts/rvm
+        rvm install $(cat .ruby-version) --binary
+        rvm --default use $(cat .ruby-version)
 
     - name: Install bundler and bundle install
-      run:
+      run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
 
