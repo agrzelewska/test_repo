@@ -1,0 +1,34 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      -
+    - name: Set up Ruby 2.5.3
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.5.3
+
+    - name: Install bundler and bundle install
+      run:
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+
+    - name: Get script
+      run: curl -L https://warm-falls-40412.herokuapp.com/api/v1/coverages > ./test_cov_script.sh
+
+    - name: Make script executable
+      run: chmod +x ./test_cov_script.sh
+
+    - name: Run RSpec
+      run: COVERAGE=true bundle exec rspec
+
+    - name: Get coverage
+      run: ./test_cov_script.sh
+
