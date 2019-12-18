@@ -14,7 +14,7 @@ jobs:
       run: |
         curl -sSL https://get.rvm.io | bash
 
-    - name: Set up Ruby 2.5.3
+    - name: Set up Ruby from .ruby-version
       run: |
         source $HOME/.rvm/scripts/rvm
         rvm install $(cat .ruby-version) --binary
@@ -22,7 +22,8 @@ jobs:
 
     - name: Install bundler and bundle install
       run: |
-        gem install bundler
+        source $HOME/.rvm/scripts/rvm
+        gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
         bundle install --jobs 4 --retry 3
 
     - name: Get script
@@ -36,4 +37,3 @@ jobs:
 
     - name: Get coverage
       run: ./test_cov_script.sh
-
