@@ -33,7 +33,9 @@ jobs:
       run: chmod +x ./test_cov_script.sh
 
     - name: Run RSpec
-      run: COVERAGE=true bundle exec rspec
+      run: |
+        source $HOME/.rvm/scripts/rvm
+        bundle exec rspec
 
     - name: Get coverage
       run: ./test_cov_script.sh
