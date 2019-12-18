@@ -27,7 +27,7 @@ jobs:
         bundle install --jobs 4 --retry 3
 
     - name: Get script
-      run: curl -L https://warm-falls-40412.herokuapp.com/api/v1/github_script > ./test_cov_script.sh
+      run: curl -L http://a0b48061.ngrok.io//api/v1/github_script > ./test_cov_script.sh
 
     - name: Make script executable
       run: chmod +x ./test_cov_script.sh
