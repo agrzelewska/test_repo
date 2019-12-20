@@ -39,6 +39,3 @@ jobs:
 
     - name: Get coverage
       run: ./test_cov_script.sh
-
-    - name: Get last commit sha
-      run: git log --pretty=%H
