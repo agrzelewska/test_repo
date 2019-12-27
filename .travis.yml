@@ -1,12 +1,4 @@
 language: ruby
 
-rvm:
-  - 2.6.3
-
-before_script:
-  - curl -L https://warm-falls-40412.herokuapp.com/api/v1/coverages > ./test_cov_script.sh
-  - chmod +x ./test_cov_script.sh
-
-script:
-  - bundle exec rspec
-  - ./test_cov_script.sh
+      rvm:
+        - 2.6.3
