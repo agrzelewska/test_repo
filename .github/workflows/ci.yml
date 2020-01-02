@@ -39,3 +39,11 @@ jobs:
 
     - name: Get coverage and add PR comment
       run: ./test_cov_script.sh
+
+    - name: comment PR
+      run: |
+        jq -nc '{"body": "test comment"}' | \
+        curl -sL -X POST -d @- \
+          -H "Content-Type: application/json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/comments"
