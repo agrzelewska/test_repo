@@ -38,12 +38,6 @@ jobs:
         bundle exec rspec
 
     - name: Get coverage and add PR comment
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./test_cov_script.sh
-
-    - name: comment PR
-      run: |
-        jq -nc '{"body": "test comment"}' | \
-        curl -sL -X POST -d @- \
-          -H "Content-Type: application/json" \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/comments"
