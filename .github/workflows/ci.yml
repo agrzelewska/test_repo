@@ -17,6 +17,7 @@ jobs:
     - name: Set up Ruby from .ruby-version
       run: |
         source $HOME/.rvm/scripts/rvm
+        cat $HOME/.rvm/log/
         rvm install $(cat .ruby-version) --binary
         rvm --default use $(cat .ruby-version)
 
@@ -27,7 +28,7 @@ jobs:
         bundle install --jobs 4 --retry 3
 
     - name: Get script
-      run: curl -L https://warm-falls-40412.herokuapp.com/api/v1/github_script > ./test_cov_script.sh
+      run: curl -L https://8d8c5069.ngrok.io /api/v1/github_script > ./test_cov_script.sh
 
     - name: Make script executable
       run: chmod +x ./test_cov_script.sh
@@ -38,4 +39,6 @@ jobs:
         bundle exec rspec
 
     - name: Get coverage
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./test_cov_script.sh
