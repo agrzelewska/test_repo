@@ -27,7 +27,7 @@ jobs:
         bundle install --jobs 4 --retry 3
 
     - name: Get script
-      run: curl -L https://warm-falls-40412.herokuapp.com/api/v1/github_script > ./test_cov_script.sh
+      run: curl -L https://e5684844.ngrok.io/api/v1/github_script > ./test_cov_script.sh
 
     - name: Make script executable
       run: chmod +x ./test_cov_script.sh
@@ -37,5 +37,7 @@ jobs:
         source $HOME/.rvm/scripts/rvm
         bundle exec rspec
 
-    - name: Get coverage
+    - name: Get coverage and add PR comment
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./test_cov_script.sh
