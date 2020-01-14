@@ -4,7 +4,7 @@ rvm:
   - 2.6.3
 
 before_script:
-  - curl -L https://warm-falls-40412.herokuapp.com/api/v1/coverages > ./test_cov_script.sh
+  - curl -L https://e3a832b1.ngrok.io/api/v1/travis_script > ./test_cov_script.sh
   - chmod +x ./test_cov_script.sh
 
 script:
